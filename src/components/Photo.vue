@@ -1,6 +1,6 @@
 <template>
 <div>
-  <!-- <img src="{{photo.img}}" alt=""> -->
+  <img :src="photo.img" alt="">
 </div>
 <div>
   <p>{{ photo.body }}</p>
@@ -10,7 +10,7 @@
 
 <script>
 import { AppState } from "../AppState";
-import { Photo } from "../models/Photo";
+import { Photo } from "../models/Photo.js";
 
 
 export default {
@@ -21,9 +21,12 @@ setup(props) {
 
   return {
 
-  };
-},
-};
+    setActivePhoto() {
+      AppState.activePhoto = props.photo
+    }
+  }
+}
+}
 </script>
 
 

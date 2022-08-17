@@ -1,8 +1,8 @@
 <template>
-<div v-if="photo">
-  <Photo :photo="photo" />
+<div>
+  <Photo />
 </div>
-<div v-else>
+<div >
   loading....
 </div>
 </template>
@@ -13,29 +13,29 @@ import { AppState } from "../AppState";
 import { photosService } from "../services/PhotosService.js";
 import { logger } from "../utils/Logger";
 import Pop from "../utils/Pop";
+import Photo from "../components/Photo.vue";
+
 
 export default {
-setup() {
-
-  async function getPhoto() {
-    try {
-      await photosService.getPhoto()
-    } catch (error) {
-      logger.error(['Getting Nasa Photo'], error)
-      Pop.toast(error.message, 'error')
-    }
-  }
-
-  onMounted(() =>  {
-    getPhoto()
-  })
-
-  return {
-    // PROXY.ON
-    photo: computed(() => AppState.photo)
-  }
-},
-
+    setup() {
+        async function getPhoto() {
+            try {
+                await photosService.getPhoto();
+            }
+            catch (error) {
+                logger.error(["Getting Nasa Photo"], error);
+                Pop.toast(error.message, "error");
+            }
+        }
+        onMounted(() => {
+            getPhoto();
+        });
+        return {
+            // PROXY.ON
+            photo: computed(() => AppState.photo)
+        };
+    },
+    components: { Photo, Photo }
 };
 
 
